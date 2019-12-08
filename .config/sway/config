@@ -65,6 +65,7 @@ output * bg ~/Pictures/starry_sky_stars_space_galaxy_118510_1920x1080.jpg fill
 #
 
     bindsym $mod+Backspace exec swaylock-blur
+    bindsym $mod+p exec keepass
 
     # start a terminal
     bindsym $mod+Return exec $term
