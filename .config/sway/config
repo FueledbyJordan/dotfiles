@@ -12,7 +12,7 @@
 #set $menu rofi -m $(expr $(swaymsg -t get_tree | jq '.nodes | map([recurse(.nodes[]?, .floating_nodes[]?) | .focused] | any) | index(true)') - 1) -show drun -run-command 'swaymsg exec -- {cmd}'
 set $menu rofi -m $(swaymsg -t get_outputs | jq 'map(select(.active) | .focused) | index(true)') -show drun -run-command 'swaymsg exec -- {cmd}'
 
-exec ~/scripts/remaps.sh
+exec_always ~/scripts/remaps.sh
 
 set $cl_high #f66733
 set $cl_indi #d9d8d8
@@ -51,7 +51,7 @@ set $term st
 # Your preferred application launcher
 # Note: it's recommended that you pass the final command to sway
 #set $menu dmenu_path | dmenu | xargs swaymsg exec
-set $BROWSER firefox
+set $BROWSER brave-browser
 
 ### Output configuration
 #

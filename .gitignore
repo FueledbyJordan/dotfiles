@@ -4,3 +4,11 @@
 .gitconfig
 .lesshst
 .viminfo
+KeePass.config.xml
+.config/.mono
+.config/BraveSoftware
+.config/pulse
+.config/dconf
+
+*.tdb
+**/*.tdb
