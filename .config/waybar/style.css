@@ -40,7 +40,7 @@ window#waybar.solo {
     color:      rgba(238, 46, 36, 1);
 }
 
-#mode, #battery, #cpu, #memory, #network, #pulseaudio, #idle_inhibitor, #backlight, #custom-storage, #custom-spotify, #custom-weather, #custom-mail {
+#mode, #battery, #cpu, #memory, #network, #pulseaudio, #custom-mopidy, #clock {
     margin:     0px 6px 0px 10px;
     min-width:  25px;
     border-bottom: 1px solid rgba(217, 216, 216, 1);
@@ -49,7 +49,6 @@ window#waybar.solo {
 #clock {
     margin:     0px 5px 0px 5px;
     min-width:  180px;
-    border-bottom: 1px solid rgba(217, 216, 216, 1);
 }
 
 #battery.warning {

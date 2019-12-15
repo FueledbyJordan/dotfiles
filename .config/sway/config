@@ -64,8 +64,12 @@ output * bg ~/Pictures/starry_sky_stars_space_galaxy_118510_1920x1080.jpg fill
 # Basics:
 #
 
-    bindsym $mod+Backspace exec swaylock-blur
+    bindsym $mod+Backspace exec lock
     bindsym $mod+p exec keepass
+    bindsym $mod+Shift+p exec plexmediaplayer
+    bindsym $mod+m exec $term ncmpcpp
+    bindsym $mod+Shift+v exec $term cava
+    bindsym $mod+n exec $term newsboat
 
     # start a terminal
     bindsym $mod+Return exec $term
@@ -78,6 +82,7 @@ output * bg ~/Pictures/starry_sky_stars_space_galaxy_118510_1920x1080.jpg fill
 
     # start browser
     bindsym $mod+w exec $BROWSER
+    bindsym $mod+Shift+w exec $BROWSER --incognito
 
     # Media Control
     bindsym XF86AudioMute exec "pactl set-sink-mute 0 toggle"
@@ -88,6 +93,10 @@ output * bg ~/Pictures/starry_sky_stars_space_galaxy_118510_1920x1080.jpg fill
     # Screen Control
     bindsym XF86MonBrightnessUp exec light -A 5
     bindsym XF86MonBrightnessDown exec light -U 5
+    bindsym XF86AudioStop exec mpc stop
+    bindsym XF86AudioPlay exec mpc toggle
+    bindsym XF86AudioNext exec mpc next
+    bindsym XF86AudioPrev exec mpc prev
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
