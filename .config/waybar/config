@@ -4,7 +4,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode"],
     //"modules-center": ["custom/mopidy"],
-    "modules-right": ["custom/mopidy", "pulseaudio", "network", "battery", "battery#bat1", "clock"],
+    "modules-right": ["custom/mopidy", "pulseaudio", "network", "custom/vpn", "battery", "clock"],
     // Modules configuration
     // "sway/workspaces": {
     //     "disable-scroll": true,
@@ -24,16 +24,19 @@
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
-    "custom/mopidy": {
-	    "format": "♪ {}",
-        //"max-length": 15,
-        "interval": 1, 
-        "exec": "mpc current", 
-        "on-click": "mpc toggle",
-        "on-click-right": "exec st ncmpcpp"	
-    },
+    //"custom/mopidy": {
+	//    "format": "♪ {}",
+    //    //"max-length": 15,
+    //    "interval": 2, 
+    //    "tooltip": false, 
+    //    "exec": "mpc current | head -n1", 
+    //    "on-click": "mpc toggle",
+    //    "on-click-right": "exec st ncmpcpp"	
+    //},
     "clock": {
-        "format": "{:%b %d, %Y    %H:%M}"
+        "tooltip": false, 
+		"interval": 1,
+        "format": "{:%b %d, %Y\t%R:%S}"
     },
     "battery": {
         "states": {
@@ -42,22 +45,29 @@
             "critical": 15
         },
         "format": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
+        "tooltip": false, 
+        "format-charging": "{capacity}% ",
         "format-plugged": "{capacity}% ",
         "format-alt": "{time} {icon}",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
         "format-icons": ["", "", "", "", ""]
     },
-    "battery#bat1": {
-        "bat": "BAT1"
-    },
+    "custom/vpn": {
+		"format": "{}",
+        "interval": 5, 
+        "tooltip": false, 
+		"exec": "vpnstatus",
+		"on-click": "exec vpntoggle"
+	},
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "{essid} ",
         "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
-        "format-disconnected": "Disconnected ⚠",
-        "on-click": "exec st nmtui"
+        "format-disconnected": "Disconnected",
+        "tooltip": false, 
+        "on-click": "exec st nmtui",
+        "interval": 5
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
@@ -66,6 +76,7 @@
         "format-bluetooth-muted": " {icon} {format_source}",
         "format-muted": "🔇 {format_source}",
         "format-source": "",
+        "tooltip": false, 
         "format-source-muted": "",
         "format-icons": {
             "headphones": "",

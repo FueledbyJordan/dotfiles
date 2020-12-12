@@ -1,0 +1,3 @@
+#!/bin/bash
+
+pass=$(rofi -dmenu -password -p "> " -mesg "$1 Type your password"); echo "${pass}"

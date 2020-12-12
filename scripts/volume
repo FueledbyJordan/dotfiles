@@ -1,13 +1,51 @@
 #!/bin/bash
 
-volume=$(pactl list sinks | grep '^[[:space:]]Volume:' | awk '{print $5}')
+volume=$(pactl list sinks | grep '^[[:space:]]Volume:' | awk '{print $5}' | sed 's/%//')
 muted_string=$(pactl list sinks | grep '^[[:space:]]Mute:' | awk '{print $2}')
+[ "$2" != "" ] && delta="$2" || delta="5"
 
-if [ "$muted_string" = "yes" ]; then
-    is_muted=true
-else
-    is_muted=false
-fi
+volume_toggle_cmd()
+{
+	pactl set-sink-mute 0 toggle
+}
 
-echo $volume
-echo $is_muted
+volume_mute_cmd()
+{
+	pactl set-sink-mute 0 true
+}
+
+volume_dec_cmd()
+{
+	pactl set-sink-mute 0 false ; pactl set-sink-volume 0 -$delta%
+}
+
+volume_inc_cmd()
+{
+
+    [[ "$volume" -lt 200 ]] && pactl set-sink-mute 0 false && pactl set-sink-volume 0 +$delta%
+}
+
+status()
+{
+	if [ "$muted_string" = "yes" ]; then
+	    is_muted=true
+	else
+	    is_muted=false
+	fi
+	
+	echo $volume
+	echo $is_muted
+}
+
+case "$1" in
+	"up") volume_inc_cmd
+	;;
+	"down") volume_dec_cmd
+	;;
+	"toggle") volume_toggle_cmd
+	;;
+	"mute") volume_mute_cmd
+	;;
+	*) status
+	;;
+esac
