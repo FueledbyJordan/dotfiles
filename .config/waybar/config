@@ -2,9 +2,9 @@
     "layer": "top", // Waybar at top layer
     "height": 30, // Waybar height (to be removed for auto height)
     // Choose the order of the modules
-    "modules-left": ["sway/workspaces", "sway/mode"],
-    //"modules-center": ["custom/mopidy"],
-    "modules-right": ["custom/mopidy", "pulseaudio", "network", "custom/vpn", "battery", "clock"],
+    "modules-left": ["sway/workspaces"],
+    "modules-center": ["custom/mopidy"],
+    "modules-right": ["pulseaudio", "network", "custom/vpn", "battery", "clock"],
     // Modules configuration
     // "sway/workspaces": {
     //     "disable-scroll": true,
@@ -21,18 +21,15 @@
     //         "default": ""
     //     }
     // },
-    "sway/mode": {
-        "format": "<span style=\"italic\">{}</span>"
+    "custom/mopidy": {
+	    //format": " {}",
+        //"max-length": 15,
+        "interval": 2, 
+        "tooltip": false, 
+        "exec": "mpc current", 
+        "on-click": "mpc toggle",
+        "on-click-right": "exec st ncmpcpp"	
     },
-    //"custom/mopidy": {
-	//    "format": "♪ {}",
-    //    //"max-length": 15,
-    //    "interval": 2, 
-    //    "tooltip": false, 
-    //    "exec": "mpc current | head -n1", 
-    //    "on-click": "mpc toggle",
-    //    "on-click-right": "exec st ncmpcpp"	
-    //},
     "clock": {
         "tooltip": false, 
 		"interval": 1,
