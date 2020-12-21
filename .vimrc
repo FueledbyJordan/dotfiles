@@ -19,6 +19,8 @@ set expandtab
 set smarttab
 filetype plugin indent on
 set encoding=utf-8
+set number
+set relativenumber
 
 nnoremap Q @q
 vnoremap Q:norm @q<cr>
