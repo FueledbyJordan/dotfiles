@@ -1,19 +1,12 @@
 #!/bin/bash
 
-swaylock \
-	--effect-blur 7x5 \
-	--effect-greyscale \
-	--ring-color d19a66 \
-	--text-color d19a66 \
-	--key-hl-color c678dd \
-	--indicator-radius 200 \
-	--indicator-thickness 32 \
-	--inside-color 000000DD \
-	--ring-ver-color 98c379 \
-	--inside-ver-color 000000DD \
-	--text-ver-color 98c379 \
-	--ring-wrong-color e06c75 \
-	--inside-wrong-color 000000DD \
-	--text-wrong-color e06c75 \
-	--bs-hl-color e06c75 \
-	--font firacode \
+grim /tmp/lock.png
+
+magick convert -resize 10% /tmp/lock.png /tmp/lock.png
+magick convert -resize 1000% /tmp/lock.png /tmp/lock.png
+magick /tmp/lock.png -type Grayscale /tmp/lock.png
+
+swaylock --image=/tmp/lock.png --ring-color d19a66 --text-color d19a66 --key-hl-color c678dd \
+    --indicator-radius 200 --indicator-thickness 32 --inside-color 000000DD --ring-ver-color 98c379 \
+    --inside-ver-color 000000DD --text-ver-color 98c379 --ring-wrong-color e06c75 --inside-wrong-color 000000DD \
+    --text-wrong-color e06c75 --bs-hl-color e06c75 --font firacode
