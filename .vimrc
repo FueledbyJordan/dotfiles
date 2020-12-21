@@ -1,4 +1,3 @@
-execute pathogen#infect()
 call plug#begin('~/.vim/plugged')
     Plug 'powerline/powerline'
     Plug 'vim-airline/vim-airline'
