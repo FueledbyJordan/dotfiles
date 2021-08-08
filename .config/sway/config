@@ -1,20 +1,20 @@
 # Default config for sway
-#set $lock ~/dotfiles/scripts/lock
-#set $menu rofi -m $(expr $(swaymsg -t get_tree | jq '.nodes | map([recurse(.nodes[]?, .floating_nodes[]?) | .focused] | any) | index(true)') - 1) -show drun -run-command 'swaymsg exec -- {cmd}'
 
 set $term st
+set $lock ~/Documents/Dev/Code/Git/dotfiles/scripts/lock
 set $menu rofi -m $(swaymsg -t get_outputs | jq 'map(select(.active) | .focused) | index(true)') -show drun -run-command 'swaymsg exec -- {cmd}'
 set $BROWSER firefox
 
 include "$HOME/.cache/wal/colors-sway"
 output * background $wallpaper fill
 
-exec_always ~/scripts/remaps.sh
+#exec_always ~/scripts/remaps.sh
 exec_always ~/.config/waybar/waybar.sh
 exec_always mako
+exec_always mopidy
 exec_always swayidle -w \
-		before-sleep 'loginctl lock-session $XDG_SESSION_ID' \
-		lock 'lock'
+        before-sleep 'loginctl lock-session $XDG_SESSION_ID' \
+        lock 'lock'
 #exec_always wal
 
 client.focused $color0 $background $foreground $color7 $background
@@ -25,8 +25,8 @@ default_floating_border normal
 hide_edge_borders smart
 
 smart_gaps off
-gaps inner 15
-#seat * hide_cursor 1000
+gaps inner 10
+seat * hide_cursor 1000
 
 input * {
     xkb_options caps:super
@@ -41,14 +41,13 @@ set $down j
 set $up k
 set $right l
 
-bindsym $mod+Backspace exec lock
+bindsym $mod+Backspace exec $lock
 bindsym $mod+p exec keeweb
 bindsym $mod+Shift+p exec plexmediaplayer
 bindsym $mod+m exec $term ncmpcpp
-bindsym $mod+Shift+v exec $term cava
 bindsym $mod+n exec $term newsboat
 bindsym $mod+t exec $term transmission-remote-cli
-bindsym $mod+Shift+r exec $term ranger
+bindsym $mod+r exec $term ranger
 bindsym $mod+o exec RuneLite.AppImage
 
 bindsym $mod+q kill
@@ -56,20 +55,20 @@ bindsym $mod+Return exec $term
 bindsym $mod+d exec $menu
 
 bindsym $mod+w exec $BROWSER
-bindsym $mod+Shift+w exec $BROWSER --incognito
+bindsym $mod+Shift+w exec $BROWSER --private-window
 
-bindsym XF86AudioMute exec "pactl set-sink-mute 0 toggle"
-bindsym XF86AudioLowerVolume exec "volume down 5"
-bindsym XF86AudioRaiseVolume exec "volume up 5"
-bindsym XF86AudioMicMute exec "volume toggle"
+bindsym XF86AudioMute exec "pamixer -t"
+bindsym XF86AudioLowerVolume exec "pamixer -u -d 5"
+bindsym XF86AudioRaiseVolume exec "pamixer -u -i 5"
+bindsym XF86AudioMicMute exec "pamixer --source 1 -t"
 
 # Screen Control
-bindsym XF86MonBrightnessUp exec light -A 5
-bindsym XF86MonBrightnessDown exec light -U 5
-bindsym XF86AudioStop exec mpc stop
+bindsym XF86MonBrightnessUp exec light -A 10
+bindsym XF86MonBrightnessDown exec light -U 10
+bindsym XF86AudioStop exec mpc pause
 bindsym XF86AudioPlay exec mpc toggle
-bindsym XF86AudioNext exec mpc next
-bindsym XF86AudioPrev exec mpc prev
+bindsym XF86AudioNext exec "mpc next; mpc play"
+bindsym XF86AudioPrev exec "mpc prev; mpc play"
 
 # Drag floating windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.
@@ -121,9 +120,8 @@ bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
-bindsym $mod+Escape workspace lmao; exec "pactl set-sink-mute 0 true"; exec $term ranger; exec $term vim .vimrc
+bindsym $mod+Escape workspace lmao; exec "pamixer -m"; exec $term ranger; exec $term vim .vimrc
 
-# move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
 bindsym $mod+Shift+2 move container to workspace 2
 bindsym $mod+Shift+3 move container to workspace 3
@@ -197,6 +195,6 @@ mode "resize" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+r mode "resize"
+bindsym $mod+Shift+r mode "resize"
 
 include /etc/sway/config.d/*
