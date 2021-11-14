@@ -3,4 +3,5 @@
 declare -A platforms=(["Game Boy"]="visualboyadvance-m" ["Nintendo DS"]="desmume")
 
 result=`printf "%b\n" "${!platforms[@]}" | rofi -dmenu -multi-select`
+[ -z $result ] && exit 0
 "${platforms[$result]}"
